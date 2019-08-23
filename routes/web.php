@@ -14,3 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('database')->group(function () {
+    Route::get('insert', 'DatabaseController@insert');
+    Route::get('get', 'DatabaseController@get');
+});
+Route::prefix('admin')->namespace('Admin')->group(function () {
+    Route::prefix('article')->group(function () {
+        Route::get('index', 'ArticleController@index');
+        Route::get('create', 'ArticleController@create');
+        Route::post('store', 'ArticleController@store');
+    });
+});
+Route::prefix('home')->namespace('Home')->group(function () {
+    Route::prefix('article')->group(function () {
+        Route::get('index', 'ArticleController@index');
+        Route::get('create', 'ArticleController@create');
+        Route::post('store', 'ArticleController@store');
+        Route::get('edit/{id}/{name}', 'ArticleController@edit')->where('id', '[0-9]+');
+    });
+});
