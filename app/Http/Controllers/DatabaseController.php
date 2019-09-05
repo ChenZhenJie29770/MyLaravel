@@ -28,9 +28,25 @@ class DatabaseController extends Controller
      */
     public function get()
     {
+//        $data = DB::table('articles')
+//                ->where('id',1)
+//                ->get();
+        
+//        $data = DB::table('articles')
+//                ->whereIn('id',[1,2])
+//                ->get();
+        
+//        $data = DB::table('articles')
+//                ->whereIn('id',[1,2])
+//                ->pluck('content', 'title');
         $data = DB::table('articles')
-                ->where('id',1)
-                ->get();
-        dump($data);
+            ->select('category_id', 'title', 'content')
+            ->where('title', '<>', '文章1')
+            ->whereIn('id', [1, 2, 3])
+            ->groupBy('category_id')
+            ->orderBy('id', 'desc')
+            ->limit(1)
+            ->get();
+        dump($data[0]);
     }
 }
