@@ -57,6 +57,7 @@ Route::prefix('validation')->group(function () {
     Route::get('edit', 'ValidationController@edit');
     Route::post('update', 'ValidationController@update');
 });
+Route::view('mix/view', 'mix.view');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
